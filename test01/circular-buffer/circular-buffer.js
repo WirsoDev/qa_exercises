@@ -11,27 +11,27 @@ class CircularBuffer {
       new InvalidValueError()
     }
     if (this.isFull() && !overweight) {
-       new BufferFullError()
+      new BufferFullError()
     }
     if (overweight) {
       this._buffer.shift() // overweight oldest item
     }
-    this._buffer.push(value);
+    this._buffer.push(value)
     return null
   }
 
   read() {
     if (this.isEmpty()) {
-       new BufferEmptyError()
+      new BufferEmptyError()
     }
     return this._buffer.shift()
   }
 
   forceWrite(value) {
     if (!this.isFull()) { // if buffer not full just write
-      this.write(value);
+      this.write(value)
     } else {
-      this.write(value, true);
+      this.write(value, true)
     }
   }
 
@@ -39,15 +39,14 @@ class CircularBuffer {
     this._buffer = []
   }
 
-
   // helper methods
 
   isEmpty() {
-    return this._buffer.length === 0;
+    return this._buffer.length === 0
   }
 
   isValueValid(value) {
-    return value !== undefined && value !== null;
+    return value !== undefined && value !== null
   }
 
   isFull() {
@@ -55,14 +54,13 @@ class CircularBuffer {
   }
 }
 
-
 // custom errors //
 
 class BufferFullError extends Error {
   constructor() {
     throw new Error(
       'The buffer is Full'
-    );
+    )
   }
 }
 
@@ -70,17 +68,16 @@ class BufferEmptyError extends Error {
   constructor() {
     throw new Error(
       'The buffer is Empty'
-    );
+    )
   }
 }
 
 class InvalidValueError extends Error {
-  constructor(){
+  constructor() {
     throw new Error(
       'Invalid value'
-    );
+    )
   }
 }
-
 
 export default CircularBuffer
