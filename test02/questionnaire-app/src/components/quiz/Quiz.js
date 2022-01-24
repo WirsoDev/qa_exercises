@@ -1,53 +1,68 @@
-import { useEffect, useState } from "react";
-import "./Quiz.css";
-import Questions from "./quizQuestions";
+import { useEffect, useState } from "react"
+import "./Quiz.css"
+import Questions from "./quizQuestions"
+import Finish from "./Finish"
 
 function Quiz() {
-  const [questions, setQuestions] = useState(Questions);
-  const [responses, setResponses] = useState({});
-  const [questionIndex, setQuestionIndex] = useState(0);
-  const [isFinal, setIsFinal] = useState(false);
-  const [prossBar, setProssBar] = useState(0);
+  const [questions, setQuestions] = useState(Questions)
+  const [responses, setResponses] = useState({})
+  const [questionIndex, setQuestionIndex] = useState(0)
+  const [selecOption, setSelecOption] = useState('')
+  const [isFinal, setIsFinal] = useState(false)
+  const [prossBar, setProssBar] = useState(0)
+  const [finish, setFinish] = useState(false)
 
   useEffect(() => {
-    // update process bar
-
+    //Clean up responses obj -> check for empty values
+    Object.keys(responses).forEach(key => {
+      if (responses[key] === '') {
+        delete responses[key]
+      }
+    })
     let manyQuestions = questions.length
-    let manyResponses = 0
+    let manyResponses = Object.keys(responses).length
+    setProssBar(Math.round((manyResponses / manyQuestions) * 100))
+  }, [responses, questions.length])
 
-    if(responses.length > 0){
-        for(const item of responses){
-            console.log(item)
-        }
-    }
-
-    setProssBar(Math.round((manyResponses / manyQuestions) * 100));
-  }, [responses]);
-
-  function nextHandler() {
+  function nextHandler(e) {
     if (questionIndex === questions.length - 2) {
-      setIsFinal(true);
-      setQuestionIndex(questionIndex + 1);
+      setIsFinal(true)
+      setQuestionIndex(questionIndex + 1)
     } else if (questionIndex === questions.length - 1) {
-      alert("Finish");
+      if (prossBar === 100) {
+        // enviar dados para tela final
+        console.log(responses)
+        setFinish(true)
+      } else {
+        return
+      }
     } else {
-      setQuestionIndex(questionIndex + 1);
+      setQuestionIndex(questionIndex + 1)
     }
   }
 
   function backHandler() {
     if (questionIndex === 0) {
-      return;
+      return
     }
-    setQuestionIndex(questionIndex - 1);
-    setIsFinal(false);
+    setQuestionIndex(questionIndex - 1)
+    setIsFinal(false)
   }
 
   function textHandeler(e) {
     setResponses((prev) => ({
       ...prev,
       [questionIndex]: e.target.value,
-    }));
+    }))
+  }
+
+  function optionsHandler(e) {
+    setSelecOption(e.target.id)
+    setResponses((prev) => ({
+      ...prev,
+      [questionIndex]: e.target.id,
+    }))
+
   }
 
   return (
@@ -69,10 +84,10 @@ function Quiz() {
             <div className="quiz-img">
               {questions[questionIndex].options.map((item) => {
                 return (
-                  <p key={item} className="selected">
+                  <p key={item} id={item} className={item === selecOption ? 'selected' : null} onClick={optionsHandler}>
                     {item}
                   </p>
-                );
+                )
               })}
             </div>
           )}
@@ -112,8 +127,9 @@ function Quiz() {
           <p>{prossBar}%</p>
         </div>
       </div>
+      {finish ? <Finish data={responses} close={() => { setFinish(false) }} /> : null}
     </>
-  );
+  )
 }
 
-export default Quiz;
+export default Quiz

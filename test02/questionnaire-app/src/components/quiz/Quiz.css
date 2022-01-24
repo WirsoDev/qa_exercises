@@ -22,9 +22,9 @@
 .quiz--quest input{
     background-color: transparent;
     border: none;
-    border-bottom: 2px solid var(--main-font-color);
+    border-bottom: 2px solid var(--light-grey);
     padding: 10px 10px;
-    width: 50%;
+    width: 30%;
     color: var(--main-font-color);
     text-align: center;
     font-size: 1em;
@@ -54,10 +54,15 @@
     border: 2px solid var(--main-font-color);
 }
 
+
 .selected{
     background-color: var(--roze);
     color: var(--light-grey) !important;
     font-weight: 700;
+}
+
+.selected:hover{
+    border: none !important;
 }
 
 .quiz--btn{
@@ -146,6 +151,7 @@
     height: 8px;
     background-color: var(--roze);
     border-radius: 50px;
+    border: .1px solid var(--light-grey);
 }
 
 .info{

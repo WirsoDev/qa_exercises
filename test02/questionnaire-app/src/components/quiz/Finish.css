@@ -1,0 +1,64 @@
+.finish{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--roze);
+    opacity: .99;
+    z-index: 99;
+    padding: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: finish 300ms ease-in-out reverse;
+    transform: scale(1.1, 1.15);
+    border-radius: 10px;
+    border: 10px solid var(--background-color)
+}
+
+@keyframes finish {
+    to{
+        opacity: 0;
+    }
+}
+
+.finish svg{
+    width: 70px;
+    animation: svg 1s ease-in-out alternate-reverse infinite;
+}
+
+@keyframes svg {
+    to{
+        transform: scale(1.1);
+    }
+}
+
+.finish svg path{
+    fill: var(--main-font-color);
+}
+
+.finish h2{
+    margin-top: 30px;
+    font-weight: 700;
+    font-size: 2em;
+    margin-bottom: 5px;
+}
+
+.finish button{
+    margin-top: 40px;
+    width: 140px;
+    background-color: transparent;
+    border: 1px solid var(--main-font-color);
+    padding: 10px 0px;
+    border-radius: 10px;
+    color: var(--main-font-color);
+    font-weight: 700;
+    transform: scale(1);
+    transition: 200ms ease-in-out;
+    cursor: pointer;
+}
+
+.finish button:hover{
+    transform: scale(1.04);
+}

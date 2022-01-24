@@ -1,9 +1,9 @@
-import { useState } from "react";
-import "./Nav.css";
-import moon from "../../assets/img/moon.svg";
-import sun from "../../assets/img/sun.svg";
+import { useState } from "react"
+import "./Nav.css"
+import moon from "../../assets/img/moon.svg"
+import sun from "../../assets/img/sun.svg"
 
-function Nav() {
+function Nav(props) {
 
     const [themeIcon, setThemeIcon] = useState(moon)
     const [dark, setDark] = useState(false)
@@ -15,7 +15,7 @@ function Nav() {
             document.documentElement.style.setProperty('--background-color', '#141414')
             document.documentElement.style.setProperty('--main-font-color', '#FFFFFF')
             document.documentElement.style.setProperty('--light-gery', '#222222')
-            document.documentElement.style.setProperty('--roze', '#998C8C')
+            document.documentElement.style.setProperty('--roze', '#5882A8')
         }
         else{
             document.documentElement.style.setProperty('--background-color', '#F5F5F5')
@@ -25,6 +25,8 @@ function Nav() {
             setDark(false)
             setThemeIcon(moon)
         }
+        props.darkthemne(dark)
+        console.log(dark)
     }
 
 
@@ -33,7 +35,7 @@ function Nav() {
       <h2>QuizApp</h2>
       <img src={themeIcon} alt="light-icon" onClick={changeTheme}/>
     </div>
-  );
+  )
 }
 
-export default Nav;
+export default Nav
