@@ -1,0 +1,8 @@
+.background{
+    width: 120vw;
+    height: 120vh;
+    position: fixed;
+    z-index: -1;
+    background-position:center;
+    background-color: var(--background-color);
+}

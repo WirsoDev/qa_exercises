@@ -1,9 +1,16 @@
 import './App.css';
+import Background from './components/background/Background';
+import Nav from './components/nav/Nav';
+import Quiz from './components/quiz/Quiz';
 
 function App() {
   return (
     <div className="App">
-      <h1>hello</h1>
+      <Background />
+      <div className="app--cont">
+        <Nav />
+        <Quiz />
+      </div>
     </div>
   );
 }

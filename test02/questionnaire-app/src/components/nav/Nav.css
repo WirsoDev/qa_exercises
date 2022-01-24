@@ -1,0 +1,22 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 5px 0px;
+  width: 100%;
+}
+
+.nav img {
+  width: 20px;
+  cursor: pointer;
+}
+
+.nav h2 {
+  font-weight: 700;
+  font-size: 1.15em;
+}
+
+.nav p {
+  font-weight: 700;
+  font-size: .85em;
+}
