@@ -8,7 +8,7 @@ function Finish(props) {
             </svg>
             <h2>Hello {props.data[0]}</h2>
             <p>You need a {props.data[1]} named {props.data[2]}!!</p>
-            <button onClick={props.close}>Not sure about that?</button>
+            <button data-testid="finish-btn" onClick={props.close}>Not sure about that?</button>
         </div>
     )
 }
