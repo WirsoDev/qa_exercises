@@ -18,7 +18,6 @@ function Background(props) {
     }
   }, [props.dark])
 
-
   useEffect(() => {
     // paralax animation
     window.addEventListener("mousemove", (e) => {

@@ -4,12 +4,12 @@ import Questions from "./quizQuestions"
 import Finish from "./Finish"
 
 function Quiz() {
-  const [questions, setQuestions] = useState(Questions)
+  const [questions] = useState(Questions)
   const [responses, setResponses] = useState({})
   const [questionIndex, setQuestionIndex] = useState(0)
   const [selecOption, setSelecOption] = useState('')
   const [isFinal, setIsFinal] = useState(false)
-  const [prossBar, setProssBar] = useState(0)
+  const [progBar, setprogBar] = useState(0)
   const [finish, setFinish] = useState(false)
 
   useEffect(() => {
@@ -21,7 +21,8 @@ function Quiz() {
     })
     let manyQuestions = questions.length
     let manyResponses = Object.keys(responses).length
-    setProssBar(Math.round((manyResponses / manyQuestions) * 100))
+    // set pross bar
+    setprogBar(Math.round((manyResponses / manyQuestions) * 100))
   }, [responses, questions.length])
 
   function nextHandler(e) {
@@ -29,9 +30,7 @@ function Quiz() {
       setIsFinal(true)
       setQuestionIndex(questionIndex + 1)
     } else if (questionIndex === questions.length - 1) {
-      if (prossBar === 100) {
-        // enviar dados para tela final
-        console.log(responses)
+      if (progBar === 100) {
         setFinish(true)
       } else {
         return
@@ -49,7 +48,7 @@ function Quiz() {
     setIsFinal(false)
   }
 
-  function textHandeler(e) {
+  function textHandler(e) {
     setResponses((prev) => ({
       ...prev,
       [questionIndex]: e.target.value,
@@ -77,7 +76,7 @@ function Quiz() {
             <input
               type="text"
               placeholder="Answer"
-              onChange={textHandeler}
+              onChange={textHandler}
               value={responses[questionIndex] ? responses[questionIndex] : ""}
             />
           ) : (
@@ -107,8 +106,6 @@ function Quiz() {
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
                 d="M9.67781 19.9088L0.93117 11.1622C0.394432 10.6254 0.394432 9.75523 0.93117 9.21849L9.67781 0.471849C10.2145 -0.0648885 11.0848 -0.0648885 11.6215 0.471849C12.1582 1.00859 12.1582 1.87881 11.6215 2.41555L3.92323 10.1138C3.92462 10.1392 3.92532 10.1647 3.92532 10.1903C3.92532 10.216 3.92462 10.2415 3.92323 10.2668L11.6215 17.9651C12.1582 18.5019 12.1582 19.3721 11.6215 19.9088C11.0848 20.4456 10.2145 20.4456 9.67781 19.9088Z"
                 fill="#EFC3C3"
               />
@@ -118,13 +115,13 @@ function Quiz() {
       </div>
       <div className="quiz-progress">
         <div className="progress-bar">
-          <span style={{ width: `${prossBar}%` }}></span>
+          <span style={{ width: `${progBar}%` }}></span>
         </div>
         <div className="info">
           <p>
             Step {questions[questionIndex].number} of {questions.length}
           </p>
-          <p>{prossBar}%</p>
+          <p>{progBar}%</p>
         </div>
       </div>
       {finish ? <Finish data={responses} close={() => { setFinish(false) }} /> : null}
