@@ -1,3 +1,29 @@
+# My test results:
+
+```
+> circular-buffer@ test D:\DEV\qa_exercises\test01\circular-buffer
+> jest --no-cache ./*
+
+ PASS  ./circular-buffer.spec.js
+  CircularBuffer
+    √ reading empty buffer should return error (8 ms)
+    √ read buffer should return oldest item
+    √ add item to full buffer should return error
+    √ can read an item just written
+    √ clear buffer should return empty buffer
+    √ force write should overweight the oldest value
+    √ force write to non-empty buffer should just write
+    √ write invalid value should return error (1 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       8 passed, 8 total
+Snapshots:   0 total
+Time:        2.078 s
+Ran all test suites matching /.\\*/i.
+
+```
+
+
 # Circular Buffer
 
 A circular buffer, cyclic buffer or ring buffer is a data structure that
